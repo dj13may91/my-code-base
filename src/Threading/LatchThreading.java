@@ -58,6 +58,32 @@ public class LatchThreading {
                 e.printStackTrace();
             }
         });
-//        System.out.println("Current latch count : " + countDownLatch.getCount());
     }
 }
+
+
+/**
+ Sample output:
+ Worker thread 1 starts
+ Worker thread 1 ends
+ Current latch count : 5
+ Worker thread 2 starts
+ Worker thread 2 ends
+ Current latch count : 4
+ Worker thread 3 starts
+ Worker thread 3 ends
+ Current latch count : 3
+ Worker thread 4 starts
+ Worker thread 4 ends
+ Current latch count : 2
+ Worker thread 5 starts
+ Worker thread 5 ends
+ Current latch count : 1
+ All tasks finished
+ returned future for id: 1 ends, Current latch count: 4
+ returned future for id: 2 ends, Current latch count: 3
+ returned future for id: 3 ends, Current latch count: 2
+ returned future for id: 4 ends, Current latch count: 1
+ returned future for id: 5 ends, Current latch count: 0
+
+ */
