@@ -28,7 +28,7 @@ class Worker implements Callable<String> {
     }
 }
 
-public class LatchThreading {
+public class Latch {
 
     public static void main(String[] args) {
         CountDownLatch countDownLatch = new CountDownLatch(5);
