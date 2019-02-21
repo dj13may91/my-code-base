@@ -32,9 +32,9 @@ class Worker implements Callable<String> {
 
     @Override
     public String call() {
-        System.out.println("Worker thread " + id + " starts");
+        System.out.println("BlockingWorker thread " + id + " starts");
         try {
-            System.out.println("Worker thread " + id + " ends");
+            System.out.println("BlockingWorker thread " + id + " ends");
             System.out.println("Current latch count : " + latch.getCount());
             latch.countDown();
             Thread.sleep(1000);
@@ -81,20 +81,20 @@ public class Latch {
 
 /**
  * Sample output:
- * Worker thread 1 starts
- * Worker thread 1 ends
+ * BlockingWorker thread 1 starts
+ * BlockingWorker thread 1 ends
  * Current latch count : 5
- * Worker thread 2 starts
- * Worker thread 2 ends
+ * BlockingWorker thread 2 starts
+ * BlockingWorker thread 2 ends
  * Current latch count : 4
- * Worker thread 3 starts
- * Worker thread 3 ends
+ * BlockingWorker thread 3 starts
+ * BlockingWorker thread 3 ends
  * Current latch count : 3
- * Worker thread 4 starts
- * Worker thread 4 ends
+ * BlockingWorker thread 4 starts
+ * BlockingWorker thread 4 ends
  * Current latch count : 2
- * Worker thread 5 starts
- * Worker thread 5 ends
+ * BlockingWorker thread 5 starts
+ * BlockingWorker thread 5 ends
  * Current latch count : 1
  * All tasks finished
  * returned future for id: 1 ends, Current latch count: 4

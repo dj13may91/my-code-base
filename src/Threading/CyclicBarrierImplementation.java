@@ -1,7 +1,6 @@
 package Threading;
 
 
-import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
@@ -40,28 +39,50 @@ public class CyclicBarrierImplementation {
 
         @Override
         public void run() {
-            System.out.println("Worker thread " + id + " starts");
+            System.out.println("BlockingWorker thread " + id + " starts");
             try {
                 Thread.sleep(1000);
-                System.out.println("Worker thread " + id + " ends");
+                System.out.println("BlockingWorker thread " + id + " ends");
                 Thread.sleep(1000);
                 barrier.await();
                 System.out.println("after await of thread " + id);
-            } catch (InterruptedException | BrokenBarrierException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
+            } catch (BrokenBarrierException e) {
+                System.out.println("Barrier broken");
             }
         }
     }
 
     public static void main(String[] args) {
-        ExecutorService service = Executors.newFixedThreadPool(7);
-        CyclicBarrier mainBarrier = new CyclicBarrier( 5, () -> {
-            System.out.println("All threads finished!! Now after await code will be executed");
-        });
+        ExecutorService service = Executors.newFixedThreadPool(3);
+        CyclicBarrier mainBarrier = new CyclicBarrier(3, () ->
+                System.out.println("All threads finished!! Now after await code will be executed")
+        );
 
-        for(int i=0; i<5;i++){
-            service.execute(new BarrierWorker(i+1, mainBarrier));
+        for (int i = 0; i < 3; i++) {
+            service.execute(new BarrierWorker(i + 1, mainBarrier));
+            if (i > 1) {
+                mainBarrier.reset();
+            }
         }
+
+        mainBarrier.reset();
         service.shutdown();
     }
 }
+
+
+/**
+ * Sample output:
+ BlockingWorker thread 3 starts
+ BlockingWorker thread 1 starts
+ BlockingWorker thread 2 starts
+ BlockingWorker thread 2 ends
+ BlockingWorker thread 3 ends
+ BlockingWorker thread 1 ends
+ All threads finished!! Now after await code will be executed
+ after await of thread 2
+ after await of thread 3
+ after await of thread 1
+ */
