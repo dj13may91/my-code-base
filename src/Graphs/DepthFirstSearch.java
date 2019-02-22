@@ -24,8 +24,8 @@ public class DepthFirstSearch {
 
     public void DfsUtil(int start, boolean[] visited) {
         visited[start] = true;
-        System.out.println(start);
-        System.out.println("start " + start + " edge list is : " + edges[start]);
+        System.out.println("\ncurrent visit: " + start);
+        System.out.print("start: " + start + ", edge list is : " + edges[start] + "\nvisited array: ");
         for (boolean b : visited) {
             System.out.print(b + ", ");
         }
@@ -56,3 +56,40 @@ public class DepthFirstSearch {
         System.out.println();
     }
 }
+
+/**
+ Output :
+ current visit: 0
+ start: 0, edge list is : [1, 2]
+ visited array: true, false, false, false, false, false, false,
+ setting start to : 1, Calling dfs for 1
+
+ current visit: 1
+ start: 1, edge list is : [0, 3, 4]
+ visited array: true, true, false, false, false, false, false,
+ setting start to : 3, Calling dfs for 3
+
+ current visit: 3
+ start: 3, edge list is : [1, 4, 5]
+ visited array: true, true, false, true, false, false, false,
+ setting start to : 4, Calling dfs for 4
+
+ current visit: 4
+ start: 4, edge list is : [1, 2, 3, 6]
+ visited array: true, true, false, true, true, false, false,
+ setting start to : 2, Calling dfs for 2
+
+ current visit: 2
+ start: 2, edge list is : [0, 4]
+ visited array: true, true, true, true, true, false, false,
+ setting start to : 6, Calling dfs for 6
+
+ current visit: 6
+ start: 6, edge list is : [4]
+ visited array: true, true, true, true, true, false, true,
+ setting start to : 5, Calling dfs for 5
+
+ current visit: 5
+ start: 5, edge list is : [3]
+ visited array: true, true, true, true, true, true, true,
+ */

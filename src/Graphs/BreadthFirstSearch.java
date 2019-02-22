@@ -53,3 +53,12 @@ public class BreadthFirstSearch {
         bfs.BFS(3);
     }
 }
+
+/**
+ * Output:
+ BFS when starting from edge: 3
+ Got: 3
+ Got: 2
+ Got: 0
+ Got: 1
+ */
