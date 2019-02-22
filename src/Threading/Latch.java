@@ -21,31 +21,30 @@ import java.util.concurrent.*;
  * on the latch to hold themselves back until it is completed
  */
 
-class Worker implements Callable<String> {
-    CountDownLatch latch;
-    int id;
-
-    Worker(CountDownLatch latch, int id) {
-        this.latch = latch;
-        this.id = id;
-    }
-
-    @Override
-    public String call() {
-        System.out.println("BlockingWorker thread " + id + " starts");
-        try {
-            System.out.println("BlockingWorker thread " + id + " ends");
-            System.out.println("Current latch count : " + latch.getCount());
-            latch.countDown();
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return "returned future for id: " + id + " ends, Current latch count: " + latch.getCount();
-    }
-}
-
 public class Latch {
+    static class Worker implements Callable<String> {
+        CountDownLatch latch;
+        int id;
+
+        Worker(CountDownLatch latch, int id) {
+            this.latch = latch;
+            this.id = id;
+        }
+
+        @Override
+        public String call() {
+            System.out.println("BlockingWorker thread " + id + " starts");
+            try {
+                System.out.println("BlockingWorker thread " + id + " ends");
+                System.out.println("Current latch count : " + latch.getCount());
+                latch.countDown();
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "returned future for id: " + id + " ends, Current latch count: " + latch.getCount();
+        }
+    }
 
     public static void main(String[] args) {
         CountDownLatch countDownLatch = new CountDownLatch(5);

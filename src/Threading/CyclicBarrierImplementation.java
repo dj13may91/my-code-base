@@ -30,7 +30,6 @@ public class CyclicBarrierImplementation {
     static class BarrierWorker implements Runnable {
         private int id;
         private CyclicBarrier barrier;
-//        private Random random;
 
         public BarrierWorker(int id, CyclicBarrier barrier) {
             this.id = id;
