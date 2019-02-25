@@ -19,7 +19,7 @@
 </p>
 
 <p>
-<h4>Domain Name System(DNS)</h4>
+<h3>Domain Name System(DNS)</h3>
 
 The Domain Name System is created to keep track of IP addresses for us so we can enter human-readable addresses in our
 browser’s URL bar instead.
@@ -37,7 +37,7 @@ on these later.
 <img src="https://qph.fs.quoracdn.net/main-qimg-9ea3adb7687da1de718a5272c535e4d7">
 
 <p>
-<h4>Steps to resolving a domain name:</h4>
+<h3>Steps to resolving a domain name:</h3>
 1. Web browser and OS will first check whether the domain is in their cache. If you’ve been to the webpage recently,
 your
 browser might already know the IP address and the search will end here. Otherwise, we shall continue.<br>
@@ -84,7 +84,7 @@ corresponding IP address.
 </p>
 
 <p>
-<h4>TCP Model</h4>
+<h3>TCP Model</h3>
 Now that we have the right IP address, we need to send a request to the server at that location to get our webpage. We
 can follow the TCP model and organize the next few steps into layers conceptually to make things a little easier to
 understand.
@@ -103,7 +103,7 @@ cookies moving from one location to another.
 <img src="https://qph.fs.quoracdn.net/main-qimg-f5f933e50c7d1b36bb48d83b0e8f90c2">
 
 <p>
-<h4>TCP/IP</h4>
+<h3>TCP/IP</h3>
 HTTP relies on TCP to establish a reliable connection between client and server. Four pieces of information are needed
 to establish a TCP connection (TCP Connection tuple):
 <br>1. Client IP address
@@ -121,8 +121,8 @@ bind specifically to a port so it will bind to one randomly and send the HTTP re
 
 
 <p>
-<h4>TCP Connection</h4>
-<br>To make a TCP connection, the client will attempt to connect with the server at the specified port. If the server
+<h3>TCP Connection</h3>
+To make a TCP connection, the client will attempt to connect with the server at the specified port. If the server
 accepts the connection request, the connection with client will occur on a new socket. This allows the server to
 continuously listen to its port for other requests whilst communicating with a client.
 <br>A three-way handshake is used to establish a TCP connection: Client initiates TCP handshake by sending a segment
@@ -140,8 +140,8 @@ sequence number with which to start.
 <img src="">
 
 <p>
-<h4>SSL</h4>
-<br>Without secured connection, communication between client and server is vulnerable. SSL is a security protocol that
+<h3>SSL</h3>
+Without secured connection, communication between client and server is vulnerable. SSL is a security protocol that
 establishes a secure connection between a client and server.
 <img src="https://qph.fs.quoracdn.net/main-qimg-aa3d74f45119cd070a4a7c1101e6c7f9">
 <br>SSL secured websites will have a lock icon on the left side of the URL
@@ -160,8 +160,8 @@ costs, it is only used to exchange and generate a symmetric key safely.
 
 
 <p>
-<h4>SSL handshake starts after successful TCP connection:</h4>
-<br><br>Client hello: Client (browser) sends a client hello message with information such as a random byte string (will
+<h3>SSL handshake starts after successful TCP connection:</h3>
+Client hello: Client (browser) sends a client hello message with information such as a random byte string (will
 be used to symmetry key session), highest SSL version browser can support, compression methods it supports, cipher suite
 it supports, etc).
 <br><br>Server hello: based off the client’s hello message, server sends a server hello message containing the chosen
@@ -184,8 +184,8 @@ encrypted with the shared symmetric key. Connection is now secured. Yay :)
 
 
 <p>
-<h4>Firewall</h4>
-<br>TCP network breaks data into chunks (packets). Along with data, a packet will have a header including control
+<h3>Firewall</h3>
+TCP network breaks data into chunks (packets). Along with data, a packet will have a header including control
 information such as source address, destination address, connection state, etc. (The packet receiver must send out a
 confirmation to the sender upon receiving a packet).
 <br>A server’s firewall can use the information provided by packets to filter what permeates through.
@@ -204,8 +204,8 @@ the requesting server’s IP.
 </p>
 
 <p>
-<h4>Load Balancer</h4>
-<br><br>After a packet makes past the firewall, it is likely to encounter a load balancer. The job of a load balancer is
+<h3>Load Balancer</h3>
+After a packet makes past the firewall, it is likely to encounter a load balancer. The job of a load balancer is
 to…. balance loads. When you have a single server handling all client requests, a large volume of traffic may overwork
 the server and cause delays /connection issues. The server alone is also a single point of failure in this case — if the
 server is down for whatever reason, users will no longer be able to access the website. Having a load balancer means
@@ -221,8 +221,8 @@ it used previously.
 </p>
 
 <p>
-<h4>Web Server, Application Server, Database</h4>
-<br><br>After load balancer selected and forwarded our request to a server, our HTTP request will be processed by its
+<h3>Web Server, Application Server, Database</h3>
+After load balancer selected and forwarded our request to a server, our HTTP request will be processed by its
 web server.
 <br>Server VS Web Server:
 <br>A server is a computer designed to process requests and deliver data to other computers over a local network or the
