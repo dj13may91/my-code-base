@@ -6,6 +6,11 @@
 </head>
 <body>
 <h2>Q. &nbsp; What happens when you type a computer IP address into a web browser in the same network as you?</h2>
+<iframe width="50%" height="600"
+        src="https://www.youtube.com/embed/7_LPdttKXPc">
+</iframe>
+
+
 <p>
     The internet is made up of a network of computers connected to each other. In order to connect and communicate
     between computers, they must follow a set of rules, Internet Protocol(IP), that govern how data is transmitted over
@@ -17,6 +22,22 @@
         IPV6 addresses. </b>Having to look for the IP address when you want to visit a webpage will take a lifetime. So
     we just type in the domain name we’re familiar with and let the magical system that is the DNS to take care of the
     rest :)
+</p>
+
+<p>
+<h3>Lame answer</h3>
+1. browser checks cache; if requested object is in cache and is fresh, skip to #9
+<br> 2. browser asks OS for server's IP address
+<br> 3. OS makes a DNS lookup and replies the IP address to the browser
+<br> 4. browser opens a TCP connection to server (this step is much more complex with HTTPS)
+<br> 5. browser sends the HTTP request through TCP connection
+<br> 6. browser receives HTTP response and may close the TCP connection, or reuse it for another request
+<br> 7. browser checks if the response is a redirect or a conditional response (3xx result status codes), authorization
+request (401), error (4xx and 5xx), etc.; these are handled differently from normal responses (2xx)
+<br> 8. if cacheable, response is stored in cache
+<br> 9. browser decodes response (e.g. if it's gzipped)
+<br> 10. browser determines what to do with response (e.g. is it a HTML page, is it an image, is it a sound clip?)
+<br> 11. browser renders response, or offers a download dialog for unrecognized types
 </p>
 
 <p>
