@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How internet works</title>
+</head>
+<body>
+<p>
+    The internet is made up of a network of computers connected to each other. In order to connect and communicate
+    between computers, they must follow a set of rules, Internet Protocol(IP), that govern how data is transmitted over
+    a network. Every machine on the web has a unique identifier to distinguish from one another. It’s similar to having
+    a telephone number or a physical address.
+    <br>
+    A typical IP address(IPv4) follows the format of 4 sets of numbers between 0–255. xxx.xxx.xxx.xxx. There are a total
+    of 4,294,967,296 IPv4 addresses available and 340,282,366,920,938,463,463,374,607,431,768,211,456
+    possible IPV6 addresses. Having to look for the IP address when you want to visit a webpage will take a lifetime. So
+    we just type in the domain name we’re familiar with and let the magical system that is the DNS to take care of the
+    rest :)
+</p>
+
+<p>
+<h4>Domain Name System(DNS)</h4>
+
+The Domain Name System is created to keep track of IP addresses for us so we can enter human-readable addresses in our
+browser’s URL bar instead.
+
+To resolve a domain name = to translate from domain name to IP address.
+
+When you type www.holbertonschool.com in your web browser and hit enter, the request will be forwarded to a DNS server.
+DNS server will then perform a DNS lookup to locate the corresponding IP address.
+
+DNS uses a client/server architecture and the DNS servers are organized in a hierarchical and distributed fashion. It
+really just means we the users are the clients requesting some kind of information from a computer somewhere that will
+serve us what we asked for. And the route in which we take will look similar to a upside down tree-like structure. More
+on these later.
+</p>
+<img src="https://qph.fs.quoracdn.net/main-qimg-9ea3adb7687da1de718a5272c535e4d7">
+
+<p>
+<h4>Steps to resolving a domain name:</h4>
+1. Web browser and OS will first check whether the domain is in their cache. If you’ve been to the webpage recently,
+your
+browser might already know the IP address and the search will end here. Otherwise, we shall continue.<br>
+2. The web browser then will send a request to a DNS resolver. A DNS resolver is a local server with a central database
+of
+DNS nameservers. For most, DNS resolvers are hosted by a user’s Internet Service Provider (ISP). The resolver will first
+check its cache. If the IP address for Holberton School of Software Engineering isn’t in its cache, it will (3)forward
+the query recursively up the to the root servers, (4)down to the Top Level Domain (TLD) of Holberton School of Software
+Engineering( .com would be the TLD in this case), and then (5)down to the authoritative name servers responsible for
+www.holbertonschool.com.
+<br>
+3. So earlier we talked about how the DNS system is organized in an upside down tree-like structure. We will go to
+the top and search downward. First stop is the root servers. Root servers respond with address to the .com Top-Level
+Domain(TLD). Top-level domain just refers to the last chunk of a domain name after the dot symbol. Here we go to the
+.com TLD, but other examples are .org, .edu, .gov, etc.
+<br>
+4. The resolver then queries .com servers for the authoritative name servers of our domain, Holberton School of
+Software
+Engineering. The authoritative name servers are the ones with the answer to our search. They hold the actual DNS
+records and will provide the IP address of our query.
+<br>
+5. So now the resolver will be able to query the authoritative name servers. Holberton School of Software Engineering’s
+authoritative name servers contain all DNS records within the domain.
+<br>
+6. Authoritative name servers will respond with the corresponding IP address of www.holbertonschool.com, allowing the
+local DNS servers to pass along to the user. But first, it will save this IP to its cache. Caching every step of the
+way!
+<br>
+7. The user’s operating system will also cache this IP address for reference in the future — in case you want to visit
+this website again to finish your Holberton application :)
+<br>
+8. The user’s web browser can now follow HTTP protocol and send a GET request to the server at holbertonschool.com’s
+corresponding IP address.
+</p>
+<img src="https://qph.fs.quoracdn.net/main-qimg-6361c570af5bdb11c3bbeeaf953acb0a">
+<p>
+    Client sends GET request and waits for server to respond when request is completed
+    <br>
+    Redundancy: There are multiple DNS servers at each level. Having redundancy ensures requests will still be processed
+    if one of the servers fail.
+    <br>
+    Client — Server:
+    Machines used to serve other machines are called servers and machines used to request service are called clients.
+</p>
+
+<p>
+<h4>TCP Model</h4>
+Now that we have the right IP address, we need to send a request to the server at that location to get our webpage. We
+can follow the TCP model and organize the next few steps into layers conceptually to make things a little easier to
+understand.
+<br><br>
+We start at the application layer — user interface. This is where we enter the URL in browser and where DNS lookup takes
+place. Once we have the actual address, we(client) can send HTTP request to server at that address and server will
+respond with the corresponding data. Hypertext Transport Protocol (HTTP) is an application layer protocol used for
+transmitting files/data across the web through TCP/IP sockets.
+<br><br>
+TCP(Transmission Control Protocol) resides in the transport layer and is responsible for creating a reliable end-to-end
+connection between two hosts. It’s similar to a messenger. Allows data transfers of other protocols(like HTTP). TCP will
+break the data down into smaller packets and then reassemble them at the other end. We can use the analogy of picking up
+cookies from grandma’s house. IP would be the road on which we drive. TCP would be the car. And HTTP would be the box of
+cookies moving from one location to another.
+</p>
+<img src="https://qph.fs.quoracdn.net/main-qimg-f5f933e50c7d1b36bb48d83b0e8f90c2">
+
+<p>
+<h4>TCP/IP</h4>
+HTTP relies on TCP to establish a reliable connection between client and server. Four pieces of information are needed
+to establish a TCP connection (TCP Connection tuple):
+<br>1. Client IP address
+<br>2. Client Port number
+<br>3. Source IP address
+<br>4. Source Port number
+<br>An IP address will identify the device, but a port number is also needed to identify the specific
+application/service. It’s similar to having an address to an apartment and a specific unit number.
+<br>IP + port number = socket
+<br>A web server will bind its application to a port and listen for connection requests. HTTP protocol uses port 80 as
+default so web servers typically bind to their port 80. On the other hand, the client’s web browser does not need to
+bind specifically to a port so it will bind to one randomly and send the HTTP request to port 80 of the web server’s IP.
+<br>Holbertonschool.com is a secured website so will be using port 443 instead.
+</p>
+
+
+<p>
+<h4>TCP Connection</h4>
+<br>To make a TCP connection, the client will attempt to connect with the server at the specified port. If the server
+accepts the connection request, the connection with client will occur on a new socket. This allows the server to
+continuously listen to its port for other requests whilst communicating with a client.
+<br>A three-way handshake is used to establish a TCP connection: Client initiates TCP handshake by sending a segment
+with SYN(Synchronize Sequence Number) flag set to 1.
+<br>Server will either accept or decline the connection. To accept, server will open ports and respond with a SYN-AWK
+segment (with SYN and AWK flags set to 1) - acknowledging client’s segment and sending a SYN segment indicating the
+sequence number with which to start.
+<br>Client sends an AWK segment back acknowledging server’s messages and will then start data transfer.
+<h5>
+    Client ->->->->->-SYN->->->->->-> Server
+    <br>Client <-<-<-<-<-ACK/SYN<-<-<-<-<-Server
+    <br>Client->->->->->-ACK->->->->->-> Server
+</h5>
+</p>
+<img src="">
+
+<p>
+<h4>SSL</h4>
+<br>Without secured connection, communication between client and server is vulnerable. SSL is a security protocol that
+establishes a secure connection between a client and server.
+<img src="https://qph.fs.quoracdn.net/main-qimg-aa3d74f45119cd070a4a7c1101e6c7f9">
+<br>SSL secured websites will have a lock icon on the left side of the URL
+Notice the protocol stated on the left is HTTPS as opposed to HTTP. HTTPS uses the same HTTP protocol but with an added
+SSL/TLS encryption.
+<br>In order for this to work, both the browser and the server need SSL Certificates. Since Holberton School of Software
+Engineering is an SSL-secured website, we will need an SSL Certificate and establish the connection through an SSL
+Handshake.
+<br>Secure Sockets Layer(SSL) / Transportation Layer Security(TLS) is an updated, more ecure version of SSL. Though this
+is still more commonly refered to as SSL.
+<br>SSL uses asymmetric encryption (public key for encryption, private key for decryption) first to generate a symmetric
+key. Communication will then use symmetric encryption (shared key). Due to asymmetric encryption’s heavy computational
+costs, it is only used to exchange and generate a symmetric key safely.
+</p>
+<img src="https://qph.fs.quoracdn.net/main-qimg-44307c5d8048027823b51d7021e5407f">
+
+
+<p>
+<h4>SSL handshake starts after successful TCP connection:</h4>
+<br><br>Client hello: Client (browser) sends a client hello message with information such as a random byte string (will
+be used to symmetry key session), highest SSL version browser can support, compression methods it supports, cipher suite
+it supports, etc).
+<br><br>Server hello: based off the client’s hello message, server sends a server hello message containing the chosen
+cipher suite, compression method, and SSL version as well as a random byte string.
+<br><br>Asymmetric encryption server authentication and key exchange:
+Server sends client its digital certificate containing its public key for client to encrypt its data before sending to
+the server.
+Server may request for client’s certificate to establish identity of the client(but optional).
+<br><br>Client verifies server’s certificate and sends a random byte string (session key, premaster secret) encrypted
+with the server’s public key(server will be able to decrypt with server’s private key). If the server requested client’s
+certificate, client will send its certificate along.
+<br><br>Symmetric encryption
+<br>Server verifies client certificate and decrypts client’s premaster secret(encrypted with server’s public key) with
+the server’s private key and will then generate a symmetric key(master secret).
+<br><br>Client will generate the same symmetric key and send a change cipher spec message (changing to symmetric
+encryption) to the server and a client finish message.
+<br><br>Server follows with a change cipher message and server finish message. The server finish message will be
+encrypted with the shared symmetric key. Connection is now secured. Yay :)
+</p>
+
+
+<p>
+<h4>Firewall</h4>
+<br>TCP network breaks data into chunks (packets). Along with data, a packet will have a header including control
+information such as source address, destination address, connection state, etc. (The packet receiver must send out a
+confirmation to the sender upon receiving a packet).
+<br>A server’s firewall can use the information provided by packets to filter what permeates through.
+<br>Packets rejected by firewall will be dropped into the abyss
+<br><br>Methods:<br>
+Packet filtering (stateless): firewall compares packets to predetermine filters. If a packet is flagged by the filters,
+it will be discarded here. Firewall allows or denies packets based on individual packet headers regardless of connection
+state. This is often used on small business and home networks.
+<br><br>Stateful inspection: Firewall collects related packets until a connection state is determined. Incoming
+information is compared to characteristics of trusted/specific characteristics. It keeps records of all connections
+passing through in order to better assess incoming packets.
+<br><br>Application/Proxy service: Firewall analyzes data with a packet and match against specific predetermined rules
+to specific services/applications. A proxy is a file server located outside of a firewall. A proxy server has its own
+IP. It takes a client’s request and sends to the requesting server so the client actually never interacts directly with
+the requesting server’s IP.
+</p>
+
+<p>
+<h4>Load Balancer</h4>
+<br><br>After a packet makes past the firewall, it is likely to encounter a load balancer. The job of a load balancer is
+to…. balance loads. When you have a single server handling all client requests, a large volume of traffic may overwork
+the server and cause delays /connection issues. The server alone is also a single point of failure in this case — if the
+server is down for whatever reason, users will no longer be able to access the website. Having a load balancer means
+workload can be distributed across servers. If one fails, others will carry on. Load balancers handle HTTP, HTTPS, TCP,
+and UDP traffic. They manage traffic by load balancing algorithms and server health checks.
+<br><br><img src="https://qph.fs.quoracdn.net/main-qimg-c22de2dfa83f73b45db752afe35a8f99">
+<br><br>Some common load balancing algorithms are Round Robin, Least Connections, and Source.
+<br>Round Robin: sequential selection. Load balancer will choose the first server for the first request, down the line,
+and repeat.
+<br>Least Connections: Select server with least amount of active sessions at time of selection.
+<br>Source: Select based on a hash of the source IP of the request. This allows client request to go to the same server
+it used previously.
+</p>
+
+<p>
+<h4>Web Server, Application Server, Database</h4>
+<br><br>After load balancer selected and forwarded our request to a server, our HTTP request will be processed by its
+web server.
+<br>Server VS Web Server:
+<br>A server is a computer designed to process requests and deliver data to other computers over a local network or the
+internet.
+<br>Web servers supply the web content for web browsers; what the browser requests, the web server delivers through
+Internet network connections.
+<br><br>Static VS dynamic content:
+<br>Static content: already processed(HTML pages, images, etc) file and need not further processing. A web server can
+directly retrieve data from codebase if static content is requested.
+<br>Dynamic content: needs to be compiled/process into a HTML file first before web server can process it.
+<br><br>If client requests for a dynamic file, web server will need to forward the request to an application server to
+process the dynamic content into HTML and retrieve data from the database if needed. Once processed, the application
+server can communicate and return the processed content to the web server.
+<br><br><img src="https://qph.fs.quoracdn.net/main-qimg-801affeedc861ec309dfd47530011550">
+<br><br>Application servers host and execute applications and can be used to communicate and extract data from a
+database — A database is a data repository that stores information. An Application server accesses a database using SQL
+(Structured Query Language) though data access drivers.
+<br><br>Once content is processed, web server will reply to the client with the requested content and an HTTP response.
+The status code within the HTTP response’s header will indicate whether the request was successfully completed.
+</p>
+
+</body>
+</html>
