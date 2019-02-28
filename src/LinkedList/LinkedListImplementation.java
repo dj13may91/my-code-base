@@ -6,7 +6,7 @@ public class LinkedListImplementation<T> {
     Node tail;
     int listSize = 0;
 
-    private class Node {
+    class Node {
         T data;
         Node next;
 
@@ -20,6 +20,10 @@ public class LinkedListImplementation<T> {
             return "Node{" +
                     "data=" + data +
                     '}';
+        }
+
+        public T getData() {
+            return data;
         }
     }
 
@@ -72,6 +76,15 @@ public class LinkedListImplementation<T> {
             temp = temp.next;
         }
         System.out.println();
+    }
+
+    public Node pop(){
+        Node currentHead = head;
+        if(head != null)
+            head = head.next;
+        else
+            head = null;
+        return currentHead;
     }
 
     public boolean delete(T data) {
@@ -135,6 +148,14 @@ public class LinkedListImplementation<T> {
 
     public int size() {
         return this.listSize;
+    }
+
+    public T getHead() {
+        return head.getData();
+    }
+
+    public T getTail() {
+        return tail.getData();
     }
 
     private boolean checkHeadExists(T data) {
