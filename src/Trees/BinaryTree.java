@@ -71,34 +71,33 @@ public class BinaryTree {
         while (nodes <= 5)
             tree.add(nodes++);
 
-        System.out.println();
+        System.out.print("\nInorder traversal: ");
         tree.inorderTraversal(tree.root);
-        System.out.println();
+        System.out.print("\nPre order traversal: ");
         tree.preOrderTraversal(tree.root);
-        System.out.println();
+        System.out.print("\nPost order traversal: ");
         tree.postOrderTraversal(tree.root);
     }
 }
 
 
- /**
- Output:
-
- Setting root value as: 1
-
- binaryNode.data=1 ->
- adding [2] left child to 1
-
- binaryNode.data=1 ->
- adding [3] right child to 1
-
- binaryNode.data=2 -> binaryNode.data=3 ->
- adding [4] left child to 2
-
- binaryNode.data=2 -> binaryNode.data=3 ->
- adding [5] right child to 2
-
- 4 2 5 1 3
- 1 2 4 5 3
- 4 5 2 3 1
+/**
+ * //       Output:
+ * //       Setting root value as: 1
+ * //
+ * //       binaryNode.data=1 ->
+ * //       adding [2] left child to 1
+ * //
+ * //       binaryNode.data=1 ->
+ * //       adding [3] right child to 1
+ * //
+ * //       binaryNode.data=2 -> binaryNode.data=3 ->
+ * //       adding [4] left child to 2
+ * //
+ * //       binaryNode.data=2 -> binaryNode.data=3 ->
+ * //       adding [5] right child to 2
+ * //
+ * //       Inorder traversal: 4 2 5 1 3
+ * //       Pre order traversal: 1 2 4 5 3
+ * //       Post order traversal: 4 5 2 3 1
  */

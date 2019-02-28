@@ -78,3 +78,32 @@ public class WidthOfBinaryTree {
         return count;
     }
 }
+
+/**
+ * //   Output:
+ * //   Setting root value as: 1
+ * //
+ * //   binaryNode.data=1 ->
+ * //   adding [2] left child to 1
+ * //
+ * //   binaryNode.data=1 ->
+ * //   adding [3] right child to 1
+ * //
+ * //   binaryNode.data=2 -> binaryNode.data=3 ->
+ * //   adding [4] left child to 2
+ * //
+ * //   binaryNode.data=2 -> binaryNode.data=3 ->
+ * //   adding [5] right child to 2
+ * //
+ * //   Inorder traversal of tree: 4 2 9 8 7 6 5 1 3
+ * //   Returning count [1] for node: 4
+ * //   Returning count [1] for node: 9
+ * //   Returning count [2] for node: 8
+ * //   Returning count [3] for node: 7
+ * //   Returning count [4] for node: 6
+ * //   Returning count [4] for node: 5
+ * //   Returning count [4] for node: 2
+ * //   Returning count [1] for node: 3
+ * //
+ * //   Width of tree is: 6
+ */
