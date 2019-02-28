@@ -14,23 +14,23 @@ package Trees;
 //This problem can also be named as number of unique vertical lines in a binary tree
 // In upper tree: 4, 2, 1-5-6, 3, 7 => 5 lines
 
-
-/**
- * //                1
- * //            2        3
- * //         4      5
- * //            6
- * //        7
- * //    8
- * // 9
- * <p>
- * For this width = 6
- */
-
 public class WidthOfBinaryTree {
     public static BinaryTree tree = new BinaryTree();
 
     public static void main(String[] args) {
+
+        /**
+         * //                1
+         * //            2        3
+         * //         4      5
+         * //            6
+         * //        7
+         * //    8
+         * // 9
+
+         * For this width = 6
+         */
+
         int nodeCount = 1;
         BinaryNode lastNodeAdded = null;
         while (nodeCount < 6)
