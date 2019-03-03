@@ -2,16 +2,27 @@ package Trees;
 
 import LinkedList.LinkedListImplementation;
 
-public class BinaryTree {
+import java.util.Comparator;
+
+public class BinaryTree<T> {
     public BinaryNode root;
+    private boolean isTreeBST = false;
+    private Comparator<T> nodeComparator;
 
     // Below queue maintains next Nodes in which we will insert child nodes.
     // At most it maintains [currentLevel + currentLevel/2] nodes
     private LinkedListImplementation<BinaryNode> queue = new LinkedListImplementation<>();
 
-    public BinaryNode add(int data) {
-        BinaryNode<Integer> node = new BinaryNode<>(data);
-        queue.printList();
+    public BinaryTree() {
+    }
+
+    public BinaryTree(boolean isTreeBST, Comparator<T> nodeComparator) {
+        this.isTreeBST = isTreeBST;
+        this.nodeComparator = nodeComparator;
+    }
+
+    public BinaryNode add(T data) {
+        BinaryNode<T> node = new BinaryNode<>(data);
 
         if (root == null) {
             System.out.println("Setting root value as: " + node.data);
@@ -20,6 +31,36 @@ public class BinaryTree {
             return node;
         }
 
+        return isTreeBST ? createBST(node, root) : createBalancedTree(node);
+    }
+
+    private BinaryNode createBST(BinaryNode<T> node, BinaryNode<T> currentParent) {
+
+        int dataComparison = nodeComparator.compare(node.data, currentParent.data);
+        if (dataComparison > 0) {
+            if (currentParent.right != null) {
+                System.out.println("Going right of tree with current parent as [" + currentParent.data + "] for node [" + node.data + "]");
+                createBST(node, currentParent.right);
+            } else {
+                System.out.println("adding [" + node.data + "] to right of parent [" + currentParent.data + "]");
+                currentParent.right = node;
+            }
+        } else if (dataComparison < 0) {
+            if (currentParent.left != null) {
+                System.out.println("Going left of tree with current parent as [" + currentParent.data + "] for node [" + node.data + "]");
+                createBST(node, currentParent.left);
+            } else {
+                System.out.println("adding [" + node.data + "] to left of parent [" + currentParent.data + "]");
+                currentParent.left = node;
+            }
+        } else {
+            System.out.println("No repeated values allowed");
+        }
+        return node;
+    }
+
+    private BinaryNode createBalancedTree(BinaryNode<T> node) {
+        queue.printList();
         BinaryNode currentParent = queue.getHead();
         if (currentParent.left == null) {
             System.out.println("adding [" + node.data + "] left child to " + currentParent.data);
@@ -65,8 +106,22 @@ public class BinaryTree {
         return root;
     }
 
+    public void printNodesLevelWise() {
+        LinkedListImplementation<BinaryNode> queue = new LinkedListImplementation<>();
+        queue.add(this.getRoot());
+        while (queue.size() > 0) {
+            BinaryNode currentNode = queue.pop();
+            System.out.print(currentNode.data + " ");
+            if (currentNode.left != null)
+                queue.add(currentNode.left);
+            if (currentNode.right != null)
+                queue.add(currentNode.right);
+        }
+        System.out.println();
+    }
+
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree();
+        BinaryTree<Integer> tree = new BinaryTree();
         int nodes = 1;
         while (nodes <= 5)
             tree.add(nodes++);
@@ -77,6 +132,9 @@ public class BinaryTree {
         tree.preOrderTraversal(tree.root);
         System.out.print("\nPost order traversal: ");
         tree.postOrderTraversal(tree.root);
+
+        System.out.print("\nLevel order traversal: ");
+        tree.printNodesLevelWise();
     }
 }
 
@@ -100,4 +158,5 @@ public class BinaryTree {
  * //       Inorder traversal: 4 2 5 1 3
  * //       Pre order traversal: 1 2 4 5 3
  * //       Post order traversal: 4 5 2 3 1
+ * //       Level order traversal: 1 2 3 4 5
  */

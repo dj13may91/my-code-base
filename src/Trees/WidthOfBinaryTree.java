@@ -1,5 +1,8 @@
 package Trees;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * Here width = 2 + 1 + 2 = 5
  * how ?
@@ -15,9 +18,11 @@ package Trees;
 // In upper tree: 4, 2, 1-5-6, 3, 7 => 5 lines
 
 public class WidthOfBinaryTree {
-    public static BinaryTree tree = new BinaryTree();
+    public static BinaryTree<Integer> tree = new BinaryTree<>();
 
     public static void main(String[] args) {
+
+        Map<String, String> map = new TreeMap<>();
 
         /**
          * //                1

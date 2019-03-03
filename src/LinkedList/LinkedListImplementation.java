@@ -78,13 +78,15 @@ public class LinkedListImplementation<T> {
         System.out.println();
     }
 
-    public Node pop(){
+    public T pop(){
         Node currentHead = head;
-        if(head != null)
+        if(head != null) {
             head = head.next;
+            listSize--;
+        }
         else
             head = null;
-        return currentHead;
+        return currentHead.data;
     }
 
     public boolean delete(T data) {
