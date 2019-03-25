@@ -150,8 +150,8 @@ continuously listen to its port for other requests whilst communicating with a c
 <br>A three-way handshake is used to establish a TCP connection: Client initiates TCP handshake by sending a segment
 with SYN(Synchronize Sequence Number) flag set to 1.
 <br>Server will either accept or decline the connection. To accept, server will open ports and respond with a SYN-AWK
-segment (with SYN and AWK flags set to 1) - acknowledging client’s segment and sending a SYN segment indicating the
-sequence number with which to start.
+(synchronize/ acknowledge) segment (with SYN and AWK flags set to 1) - acknowledging client’s segment and sending a SYN
+segment indicating the sequence number with which to start.
 <br>Client sends an AWK segment back acknowledging server’s messages and will then start data transfer.
 <h5>
     Client ->->->->->-SYN->->->->->-> Server
@@ -172,7 +172,8 @@ SSL/TLS encryption.
 <br>In order for this to work, both the browser and the server need SSL Certificates. Since Holberton School of Software
 Engineering is an SSL-secured website, we will need an SSL Certificate and establish the connection through an SSL
 Handshake.
-<br>Secure Sockets Layer(SSL) / Transportation Layer Security(TLS) is an updated, more ecure version of SSL. Though this
+<br>Secure Sockets Layer(SSL) / Transportation Layer Security(TLS) is an updated, more secure version of SSL. Though
+this
 is still more commonly refered to as SSL.
 <br>SSL uses asymmetric encryption (public key for encryption, private key for decryption) first to generate a symmetric
 key. Communication will then use symmetric encryption (shared key). Due to asymmetric encryption’s heavy computational
@@ -185,7 +186,7 @@ costs, it is only used to exchange and generate a symmetric key safely.
 <h3>SSL handshake starts after successful TCP connection:</h3>
 Client hello: Client (browser) sends a client hello message with information such as a random byte string (will
 be used to symmetry key session), highest SSL version browser can support, compression methods it supports, cipher suite
-it supports, etc).
+it supports, etc.
 <br><br>Server hello: based off the client’s hello message, server sends a server hello message containing the chosen
 cipher suite, compression method, and SSL version as well as a random byte string.
 <br><br>Asymmetric encryption server authentication and key exchange:
@@ -246,13 +247,13 @@ it used previously.
 <h3>Web Server, Application Server, Database</h3>
 After load balancer selected and forwarded our request to a server, our HTTP request will be processed by its
 web server.
-<br>Server VS Web Server:
-<br>A server is a computer designed to process requests and deliver data to other computers over a local network or the
+<h5>Server VS Web Server:</h5>
+A server is a computer designed to process requests and deliver data to other computers over a local network or the
 internet.
 <br>Web servers supply the web content for web browsers; what the browser requests, the web server delivers through
 Internet network connections.
-<br><br>Static VS dynamic content:
-<br>Static content: already processed(HTML pages, images, etc) file and need not further processing. A web server can
+<h5>Static VS dynamic content:</h5>
+Static content: already processed(HTML pages, images, etc) file and need not further processing. A web server can
 directly retrieve data from codebase if static content is requested.
 <br>Dynamic content: needs to be compiled/process into a HTML file first before web server can process it.
 <br><br>If client requests for a dynamic file, web server will need to forward the request to an application server to
