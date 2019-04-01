@@ -5,11 +5,11 @@ import LinkedList.LinkedListImplementation;
 import java.util.Comparator;
 
 public class BinaryTree<T> {
-    public BinaryNode root;
+    public BinaryNode<T> root;
     private boolean isTreeBST = false;
     private Comparator<T> nodeComparator;
 
-    // Below queue maintains next Nodes in which we will insert child nodes.
+    // Below queue maintains next Nodes in which we will insert child nodes for a balanced tree.
     // At most it maintains [currentLevel + currentLevel/2] nodes
     private LinkedListImplementation<BinaryNode> queue = new LinkedListImplementation<>();
 
@@ -102,7 +102,28 @@ public class BinaryTree<T> {
         System.out.print(binaryNode.data + " ");
     }
 
-    public BinaryNode getRoot() {
+    public int heightOfTree() {
+        BinaryNode<T> root = getRoot();
+        if (root == null) {
+            return 0;
+        }
+        int leftTreeHeight = getSubtreeHeight(root.left);
+        int rightTreeHeight = getSubtreeHeight(root.right);
+
+        return leftTreeHeight > rightTreeHeight ? leftTreeHeight : rightTreeHeight;
+    }
+
+    public int getSubtreeHeight(BinaryNode<T> node) {
+        if (node == null)
+            return 0;
+
+        int leftTreeHeight = 1 + getSubtreeHeight(node.left);
+        int rightTreeHeight = 1 + getSubtreeHeight(node.right);
+
+        return leftTreeHeight > rightTreeHeight ? leftTreeHeight : rightTreeHeight;
+    }
+
+    public BinaryNode<T> getRoot() {
         return root;
     }
 
@@ -121,7 +142,7 @@ public class BinaryTree<T> {
     }
 
     public static void main(String[] args) {
-        BinaryTree<Integer> tree = new BinaryTree();
+        BinaryTree<Integer> tree = new BinaryTree<>();
         int nodes = 1;
         while (nodes <= 5)
             tree.add(nodes++);

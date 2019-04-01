@@ -2,8 +2,8 @@ package Trees;
 
 class BinaryNode<T> {
     T data;
-    BinaryNode left;
-    BinaryNode right;
+    BinaryNode<T> left;
+    BinaryNode<T> right;
 
     BinaryNode(T data) {
         this.data = data;
