@@ -1,8 +1,7 @@
 package Competitive_programming;
 
 /**
- * Google interview :
- * MAXIMUM points that can be collected in an N*M matrix
+ * Google interview : MAXIMUM points that can be collected in an N*M matrix
  * You can move either right or down
  * Start from [0,0]
  */
@@ -11,12 +10,18 @@ public class MaxSumInMatrix {
     static class Visits {
         int max;
         boolean isVisited;
+        int timesVisited;
 
         Visits() {
             this.max = 0;
             this.isVisited = false;
+            this.timesVisited = 0;
         }
 
+        @Override
+        public String toString() {
+            return "[" + max + ", " + isVisited + ", " + timesVisited + "]";
+        }
     }
 
     private static Visits visited[][];
@@ -33,9 +38,19 @@ public class MaxSumInMatrix {
         for (int i = 0; i < arr.length; i++)
             for (int j = 0; j < arr[i].length; j++)
                 visited[i][j] = new Visits();
+
+        System.out.println(getMaxPoints(arr));
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++)
+                System.out.print(visited[i][j] + " ");
+            System.out.println();
+        }
+
     }
 
-    public static int getMaxPoints(int array[][]) {
+    private static int getMaxPoints(int array[][]) {
+
         if (array.length == 1 && array[0].length == 1)
             return array[0][0];
 
@@ -45,10 +60,9 @@ public class MaxSumInMatrix {
     }
 
 
-    public static int collectMaxPoints(int x, int y, int arr[][]) {
-        if (x == arr.length || y == arr[0].length) {
+    private static int collectMaxPoints(int x, int y, int arr[][]) {
+        if (x == arr.length || y == arr[0].length)
             return 0;
-        }
 
         if (visited[x][y].isVisited)
             return visited[x][y].max;
@@ -57,6 +71,7 @@ public class MaxSumInMatrix {
         int startDown = arr[x][y] + collectMaxPoints(x, y + 1, arr);
         visited[x][y].max = startRight > startDown ? startRight : startDown;
         visited[x][y].isVisited = true;
+        visited[x][y].timesVisited++;
         return visited[x][y].max;
     }
 
