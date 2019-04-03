@@ -11,20 +11,20 @@ public class CollisionCourse {
         int objectCount = Integer.parseInt(scan.nextLine());
         List<Integer> objectSpeeds = new ArrayList<>();
         int collisionCount = 0;
-        while(objectCount > 0) {
+        while (objectCount > 0) {
             objectSpeeds.add(Integer.parseInt(scan.nextLine()));
             objectCount--;
         }
 
         int particleToMonitor = Integer.parseInt(scan.nextLine());
-        for(int i =0; i< particleToMonitor; i++) {
-            if(objectSpeeds.get(i) > particleToMonitor){
+        for (int i = 0; i < particleToMonitor; i++) {
+            if (objectSpeeds.get(i) > objectSpeeds.get(particleToMonitor)) {
                 collisionCount++;
             }
         }
 
-        for(int i =particleToMonitor; i< objectSpeeds.size(); i++) {
-            if(objectSpeeds.get(i) < particleToMonitor){
+        for (int i = particleToMonitor + 1; i < objectSpeeds.size(); i++) {
+            if (objectSpeeds.get(i) < objectSpeeds.get(particleToMonitor)) {
                 collisionCount++;
             }
         }
@@ -33,28 +33,28 @@ public class CollisionCourse {
 }
 
 /**
-8
-6
-6
-1
-6
-3
-4
-6
-8
-2
-
-
-10
-8
-3
-6
-3
-2
-2
-4
-8
-1
-6
-7
+ 8
+ 6
+ 6
+ 1
+ 6
+ 3
+ 4
+ 6
+ 8
+ 2
+ * <p>
+ * <p>
+ * 10
+ * 8
+ * 3
+ * 6
+ * 3
+ * 2
+ * 2
+ * 4
+ * 8
+ * 1
+ * 6
+ * 7
  */

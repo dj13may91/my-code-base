@@ -23,9 +23,11 @@ public class RemoveChocolates {
                 multipliers.add(currentCombinations);
             }
         }
-
-        System.out.println(multipliers);
-        System.out.println(possibleCombinations);
+        for(double mul : multipliers) {
+            possibleCombinations += mul;
+            possibleCombinations = possibleCombinations % 1000000007;
+        }
+        System.out.println(possibleCombinations % 1000000007);
     }
 
     //Using permutation formula:  [ n!/(r! * (n-r)!) ]
@@ -57,17 +59,5 @@ public class RemoveChocolates {
             }
         }
         return chocolates;
-    }
-
-    private static double getFactorial(long num, long upto) {
-        if (num == 0) {
-            return 1;
-        }
-        long factorial = 1;
-        while (num - upto >= 1) {
-            factorial = factorial * num;
-            num--;
-        }
-        return factorial;
     }
 }
