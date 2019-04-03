@@ -19,14 +19,11 @@ public class RemoveChocolates {
                 chocolateCount = chocolateCount - 3;
                 countOfThrees++;
                 List<Integer> combos = getPossibleCombinations(chocolateCount, countOfThrees);
-                double currentCombinations = combos.stream().reduce(1,(a,b) -> a * b);
+                double currentCombinations = combos.stream().reduce(1, (a, b) -> a * b);
                 multipliers.add(currentCombinations);
             }
         }
-        for(double mul : multipliers) {
-            possibleCombinations += mul;
-            possibleCombinations = possibleCombinations % 1000000007;
-        }
+
         System.out.println(possibleCombinations % 1000000007);
     }
 
@@ -53,7 +50,7 @@ public class RemoveChocolates {
         for (int i = 0; i < dividers.size(); i++) {
             for (int j = 0; j < chocolates.size(); j++) {
                 if (chocolates.get(j) % dividers.get(i) == 0) {
-                    chocolates.set(j, chocolates.get(j)/dividers.get(i));
+                    chocolates.set(j, chocolates.get(j) / dividers.get(i));
                     j = chocolates.size();
                 }
             }

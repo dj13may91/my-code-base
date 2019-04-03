@@ -18,13 +18,13 @@ public class CollisionCourse {
 
         int particleToMonitor = Integer.parseInt(scan.nextLine());
         for (int i = 0; i < particleToMonitor; i++) {
-            if (objectSpeeds.get(i) > objectSpeeds.get(particleToMonitor)) {
+            if (objectSpeeds.get(i) > particleToMonitor) {
                 collisionCount++;
             }
         }
 
         for (int i = particleToMonitor + 1; i < objectSpeeds.size(); i++) {
-            if (objectSpeeds.get(i) < objectSpeeds.get(particleToMonitor)) {
+            if (objectSpeeds.get(i) < particleToMonitor) {
                 collisionCount++;
             }
         }
