@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class RemoveChocolates {
+public class ChocolateArrangement {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
