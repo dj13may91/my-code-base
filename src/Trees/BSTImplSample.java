@@ -1,33 +1,14 @@
 package Trees;
 
 import java.util.Comparator;
-
-class Employee {
-    int id;
-    int age;
-    int salary;
-
-    public Employee(int id, int age, int salary) {
-        this.id = id;
-        this.age = age;
-        this.salary = salary;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
-}
+import shared.CompareNodes;
+import shared.Employee;
 
 public class BSTImplSample {
 
     public static void main(String[] args) {
         CompareNodes compareNodes = new CompareNodes();
-        BinaryTree<Employee> tree = new BinaryTree<>(true, compareNodes);
+        BinaryTree<Employee> tree = new BinaryTree<>(compareNodes);
         int nodes = 0;
         while (nodes++ <= 7)
             tree.add(new Employee(nodes, ((int) (Math.random() * 100)), ((int) (Math.random() * 100000))));
@@ -36,16 +17,6 @@ public class BSTImplSample {
         System.out.println();
         System.out.println("height of tree: " + tree.heightOfTree());
 
-    }
-}
-
-class CompareNodes implements Comparator<Employee> {
-    @Override
-    public int compare(Employee o1, Employee o2) {
-        if (o1.age == o2.age)
-            return o1.salary - o2.salary;
-        else
-            return o1.age - o2.age;
     }
 }
 

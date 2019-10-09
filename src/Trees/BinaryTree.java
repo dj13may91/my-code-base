@@ -16,8 +16,8 @@ public class BinaryTree<T> {
     public BinaryTree() {
     }
 
-    public BinaryTree(boolean isTreeBST, Comparator<T> nodeComparator) {
-        this.isTreeBST = isTreeBST;
+    public BinaryTree(Comparator<T> nodeComparator) {
+        this.isTreeBST = true;
         this.nodeComparator = nodeComparator;
     }
 
