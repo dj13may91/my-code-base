@@ -13,7 +13,7 @@ public class FamilyTree {
   private Map<String, Person> familyTreeMap = new HashMap<>();
 
   public static void main(String[] args) {
-    FamilyTree familyTree = new FamilyTree();
+    FamilyTree family = new FamilyTree();
     List<Person> people = new ArrayList<Person>() {{
       add(new Person("ken", 28, 'm', "laura", "bridget", "shauna"));
       add(new Person("shauna", 26, 'f', "mary", "jones", "ken"));
@@ -30,15 +30,20 @@ public class FamilyTree {
       add(new Person("donna", 86, 'f', null, null, "donald"));
     }};
 
-    people.forEach(familyTree::updateTree);
-    familyTree.familyTreeMap.keySet()
-        .forEach(s -> System.out.println(familyTree.familyTreeMap.get(s)));
+    // for each person, create and update tree on the go
+    people.forEach(family::updateTree);
 
-    familyTree.printInLaws("ken");
+    // printing whole family map
+    family.familyTreeMap.keySet().forEach(s -> System.out.println(family.familyTreeMap.get(s)));
+
+    //sample test for getting brother in law of ken
+    family.printInLaws("ken");
   }
 
   private void updateTree(Person person) {
     familyTreeMap.put(person.getName(), person);
+
+    //create father's name reference even if it doesnt exist and update later when creating whole object
     if (person.getFather() != null) {
       updatePersonRelationship(person, person.getFather());
     }
@@ -49,11 +54,15 @@ public class FamilyTree {
 
   private void updatePersonRelationship(Person person, String parentName) {
     Person parent = familyTreeMap.get(parentName);
+    //if parent's name is not present in map, create it  and set name
     if (parent == null) {
       parent = new Person();
       parent.setName(parentName);
     }
+    // update parent's kid list
     parent.getKids().add(person.getName());
+
+    // update parent reference in map
     familyTreeMap.put(parent.getName(), parent);
   }
 
