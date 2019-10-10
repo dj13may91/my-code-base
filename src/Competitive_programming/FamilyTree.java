@@ -2,8 +2,10 @@ package Competitive_programming;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import shared.Person;
 
 public class FamilyTree {
@@ -31,6 +33,8 @@ public class FamilyTree {
     people.forEach(familyTree::updateTree);
     familyTree.familyTreeMap.keySet()
         .forEach(s -> System.out.println(familyTree.familyTreeMap.get(s)));
+
+    familyTree.printInLaws("ken");
   }
 
   private void updateTree(Person person) {
@@ -52,8 +56,26 @@ public class FamilyTree {
     parent.getKids().add(person.getName());
     familyTreeMap.put(parent.getName(), parent);
   }
-}
 
+  private void printInLaws(String personName){
+    Person spouse = familyTreeMap.get(personName);
+    List<String> inLawListFather = familyTreeMap.get(
+        spouse.getFather()
+    ).getKids();
+
+    List<String> inLawListMother = familyTreeMap.get(
+        spouse.getMother()
+    ).getKids();
+
+    Set<String> inLawIntersection = new HashSet<>();
+    inLawIntersection.addAll(inLawListFather);
+    inLawIntersection.addAll(inLawListMother);
+
+    System.out.println("In laws: " + inLawIntersection);
+  }
+
+
+}
 
 /**
  Output:
@@ -76,4 +98,6 @@ public class FamilyTree {
  Person{name='jones', age=0, sex= , mother='null', father='null', spouse='null', kids=[shauna]}
  Person{name='leena', age=0, sex= , mother='null', father='null', spouse='null', kids=[laura]}
  Person{name='charlie', age=10, sex=m, mother='britney', father='boris', spouse='null', kids=[]}
+
+ In laws : [keanu, britney]
 */
