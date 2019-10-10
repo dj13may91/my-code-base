@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-import shared.CompareNodes;
-import shared.Employee;
 
 //Implementing min heap here
 public class MaxHeap<T> {
@@ -22,27 +19,14 @@ public class MaxHeap<T> {
   private Comparator<T> comparator;
   private int lastNonLeafNode;
 
-  public static void main(String[] args) {
-    MaxHeap<Employee> heap = new MaxHeap<>();
+  public MaxHeap(List<T> heapList, Comparator<T> comparator) {
+    this.heapList = heapList;
+    this.comparator = comparator;
+    lastNonLeafNode = getParentIndex(heapList.size() - 1);
 
-    int nodes = 0;
-    while (nodes++ <= 7) {
-      heap.heapList.add(
-          new Employee(nodes, ((int) (Math.random() * 100)), ((int) (Math.random() * 100000))));
+    while (lastNonLeafNode >= 0) {
+      heapify(lastNonLeafNode--);
     }
-    heap.comparator = new CompareNodes();
-    heap.lastNonLeafNode = heap.getParentIndex(heap.heapList.size() - 1);
-    System.out.println(heap.heapList);
-    System.out.println(heap.heapList.parallelStream().map(e -> e.age).collect(Collectors.toList()));
-    while (heap.lastNonLeafNode >= 0) {
-      heap.heapify(heap.lastNonLeafNode--);
-      System.out.println(
-          heap.heapList.parallelStream().map(e -> e.age).collect(Collectors.toList()));
-    }
-    System.out.println(heap.heapList);
-    System.out.println(heap.heapList.parallelStream().map(e -> e.age).collect(Collectors.toList()));
-
-    new BuildHeap(heap.heapList.parallelStream().map(e -> e.age).collect(Collectors.toList()));
   }
 
   private void heapify(int leafIndex) {
@@ -51,7 +35,7 @@ public class MaxHeap<T> {
     T root = heapList.get(leafIndex);
     int swappedIndex = -1;
     if (left != null && comparator.compare(root, left) < 0
-        && comparator.compare(left, right) >= 0) {
+        && comparator.compare(left, right) > 0) {
       Collections.swap(heapList, leafIndex, getLeftIndex(leafIndex));
       swappedIndex = getLeftIndex(leafIndex);
     } else if (right != null && comparator.compare(root, right) < 0) {
@@ -64,7 +48,7 @@ public class MaxHeap<T> {
   }
 
   private T leftChild(int i) {
-    if (getLeftIndex(i) >= heapList.size() - 1) {
+    if (getLeftIndex(i) > heapList.size() - 1) {
       return null;
     }
     return heapList.get(getLeftIndex(i));
