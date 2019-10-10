@@ -4,6 +4,12 @@ import java.util.Comparator;
 
 public class CompareNodes implements Comparator<Employee> {
 
+  /**
+   *
+   * @param o1
+   * @param o2
+   * @return
+   */
   @Override
   public int compare(Employee o1, Employee o2) {
     if (o1 == o2) {
