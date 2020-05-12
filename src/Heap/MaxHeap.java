@@ -34,8 +34,7 @@ public class MaxHeap<T> {
     T right = rightChild(leafIndex);
     T root = heapList.get(leafIndex);
     int swappedIndex = -1;
-    if (left != null && comparator.compare(root, left) < 0
-        && comparator.compare(left, right) > 0) {
+    if (left != null && comparator.compare(root, left) < 0 && comparator.compare(left, right) > 0) {
       Collections.swap(heapList, leafIndex, getLeftIndex(leafIndex));
       swappedIndex = getLeftIndex(leafIndex);
     } else if (right != null && comparator.compare(root, right) < 0) {
