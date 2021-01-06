@@ -48,7 +48,7 @@ public class MaxSumInMatrix {
   }
 
   private static int collectMaxPoints(int x, int y, int[][] arr) {
-    if (x == arr.length || y == arr[0].length) {
+    if (x == arr.length || y == arr[x].length) {
       return 0;
     }
 

@@ -1,0 +1,5 @@
+actors:
+  users, admin , shopping cart, orders , system, payment modes, item info and reviews; notification
+
+action:
+  buy, sell and checkout products; shipment tracking, payment , search, notification
