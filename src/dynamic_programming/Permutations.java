@@ -8,13 +8,14 @@ public class Permutations {
   public static Set<String> words = new HashSet<>();
 
   public static void main(String[] args) {
-    String word = "aabc";
+    String word = "abc";
     combinations(word, 0);
-    System.out.println(words.size() + " - " + words);
+//    System.out.println(words.size() + " - " + words);
   }
 
   public static void combinations(String word, int fixedIndex) {
-    if (fixedIndex >= word.length() - 1) {
+    if (fixedIndex == word.length() - 1) {
+      System.out.println(word);
       return;
     }
     for (int i = fixedIndex; i < word.length(); i++) {
