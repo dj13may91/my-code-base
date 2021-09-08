@@ -24,22 +24,18 @@ public class MultiplyStrings {
         int carry = res[pos];
         int currVal = ((num2.charAt(j) - '0') * (num1.charAt(i) - '0')) + carry;
         res[pos] = currVal % 10;
-        res[pos-1] += currVal / 10;
+        res[pos - 1] += currVal / 10;
         System.out.println(Arrays.toString(res));
       }
     }
     int pointer = 0;
-    while(res[pointer] == 0){
+    while (res[pointer] == 0) {
       pointer++;
     }
     StringBuilder builder = new StringBuilder();
-    for(int i=pointer; i<res.length ; i++){
+    for (int i = pointer; i < res.length; i++) {
       builder.append(res[i]);
     }
     return String.valueOf(builder);
-  }
-
-  public static int getCurrNum(String num, int index) {
-    return num.charAt(index) - '0';
   }
 }

@@ -7,13 +7,13 @@ import java.util.Set;
  * Given a set of non-negative integers, and a value sum, determine if there is a subset of the
  * given set with sum equal to given sum. Example:
  *
- * Input:  set[] = {3, 34, 4, 12, 5, 2}, sum = 9
- * Output:  True  // There is a subset (4, 5) with sum 9.
+ * Input:  set[] = {3, 34, 4, 12, 5, 2}, sum = 9 Output:  True  // There is a subset (4, 5) with sum
+ * 9.
  */
 public class SubsetSum {
 
   private static int[] arr = {3, 34, 4, 12, 5, 2, 7};
-  private static int SUM = 9;
+  private static int SUM = 19;
 
   public static void main(String[] args) {
     for (int i = 0; i < arr.length; i++) {
@@ -45,8 +45,6 @@ public class SubsetSum {
 }
 
 /**
- * Sample output
- * Started from index:0, subset: [0, 2, 5]
- * Started from index:2, subset: [2, 4]
+ * Sample output Started from index:0, subset: [0, 2, 5] Started from index:2, subset: [2, 4]
  * Started from index:5, subset: [5, 6]
  */
