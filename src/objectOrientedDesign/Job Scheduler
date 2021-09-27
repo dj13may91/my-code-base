@@ -1,0 +1,70 @@
+Job scheduler:
+
+requirements:
+Job can be scheduled like n>=1 times, default 1
+Show result of jobs
+job kind : cron(execute in every X time) or task (1 time execution)
+
+non functional:
+number of jobs that can run in a day: 1M
+we should be able to persist job results
+job should be executed in realtime else dropped or skipped ?
+High availability
+execution time should not exceed 1 hour else terminate with proper resoning
+
+Job properties:
+
+USER:
+userId, name, email, pass, accountStatus,
+accountType(free, paid, enterprise),
+currentJobLimit(10,100,10k)
+
+JOB:
+id, name, userId, retry(max 5),
+status(running, scheduled, completed, terminated, failed)
+kind(cron/task), startTime, endtime,
+priority(high, med, low),
+cronString(* * * * 30 *) : (every 30 minutes)
+type(sync/async)
+setOfCommands
+
+NOTIFICATION:
+job_id, status, execution_time, noti_type(email/text/popUp_app),
+link_for_jon_details
+
+RETRY_JOBS:
+id, jobid, failureReason, times_retried, userid
+
+RESULTS:
+Jobid, List<results>
+
+
+Trigger:
+fetchJobsToRun() <= cap of 50 jobs max and mark start_time
+ => cron
+ => task
+updateJob(type, jobId, status, endTime)
+=> notify user
+=> if task, mark completed, move to completed DB(no sql)
+retryMechanism() => run failed jobs again
+getCronString() => (0,0,0,0,1,10)
+runJob(type, id) <=
+
+
+UI Apis:
+getJobById(id)
+getJobs(userId)
+getFailedJobs(userId)
+getCompletedJobs(userId)
+createJob(job-metadata) : post
+getCronString() => (0,0,0,0,1,10)
+runFailedJob(id)
+testJob(sync, jobmetadata) : post
+
+
+
+
+
+
+
+

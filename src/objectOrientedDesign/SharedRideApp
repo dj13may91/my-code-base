@@ -1,0 +1,71 @@
+Hi
+
+
+Ride sharing app --
+------------------------
+
+Car Owner should be able to set his/her travel details : ok
+Rider also should be able to set the ride details : ok
+Car Owner should be able to send request to Rider based on rider’s details → ok
+Riders should be able to send requests to owners.  : ok
+Owner side -
+a. Total number of Trips shared per day. : ok
+b. Total saved petrol per day. : ..
+
+_____________________________________________________________
+<> => high level
+**  => future scope
+[] => ENUMS
+
+Players : 
+Account: userId, userType, *wallet*, [accountStatus]
+Rider: Id, name email, phone, location[lat, long]
+Driver : Id, name , phone, carId, location[], seatsLeft[0-n], currentTrip
+Car: id, driverId, seats,*cost/km*
+Trip : driverId, List<Riders>, source, destination, [trip_status], startTime, endTime, *fare*
+Ride: Riderid, pickupLoc, dropLoc, 
+
+[accountStatus] : active, inactive, blocked
+[trip_status]: Created, InProgress, Completed, Rescheduled, Cancelled 
+
+ // s-----R1-----r2-------d
+System(app)/Tripmanager:  (APIs)
+{
+		Trips <userId : List<Trip>
+		riderManager : rides
+}
+
+<Driver and rider matching engine>
+*payment*
+
+
+
+
+
+
+
+
+
+Players : 
+Account: userId, userType, *wallet*, [accountStatus]
+Rider: Id, name email, phone, location[lat, long]
+Driver : Id, name , phone, List<carId>, currentTrip(tripId)
+DriverManager: driverId, List<tripId>
+RiderManager: riderId, List<rideId>
+Car: id, driverId, seats,*cost/km*
+Trip : driverId, List<Riders>, source, dest, [trip_status], startTime, endTime, *fare*,  seatsLeft[0-n], carid
+Ride:id, Riderid, pickupLoc, dropLoc, startTime, noOfSeats
+
+Petrol saved: Summation<1-n>(drop-pickup)) => 
+
+Lifecycle:
+User
+Login
+requestRide(rideId)
+ listOfTrips() => 10 riders, 
+selectTripAndRequest => driver => accept/reject
+If accepted, send driver details : car details, phone no.
+Driver:
+Login
+setRide(driverId, carId, source, dest, fare/km, startTime) : new trip(), 
+requestRider(tripId) =>  rider=> accept/reject

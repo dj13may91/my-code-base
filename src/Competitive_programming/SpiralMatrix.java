@@ -22,6 +22,23 @@ public class SpiralMatrix {
     for(int i=0; i< spiralMatrix.size; i++){
       System.out.println(Arrays.toString(spiralMatrix.matrix[i]));
     }
+    sumDiagonal(spiralMatrix.matrix);
+  }
+
+  private static void sumDiagonal(int[][] arr){
+    int sum = 0;
+    for(int i=0; i< arr.length; i++){
+      System.out.print(arr[i][i] + " ");
+      sum = sum + arr[i][i];
+    }
+    System.out.println();
+    for(int i=arr.length-1; i>=0; i--){
+      System.out.print(arr[arr.length-1 - i][i] + " ");
+      sum = sum + arr[arr.length-1 - i][i];
+    }
+    System.out.println();
+    int len = arr.length - 1;
+    System.out.println(sum - arr[len/2][len/2]);
   }
 
   private void moveRight(int row, int col, int currNum) {

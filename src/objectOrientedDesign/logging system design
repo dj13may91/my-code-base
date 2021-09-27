@@ -1,0 +1,58 @@
+LLD: Dynamic Log processing System, which will have the following responsibilities.
+Collection of logs in a central location.
+Matching of logs based on the predefined criteria
+Preprocess them to be available for end-user consumption.
+
+
+Components:
+[ ] -> enums
+< > -> schema/table/entity
+
+[ACCOUNT_TYPE]: PAID, FREE
+[ACCOUNT_STATUS]: active, inactive, blocked
+[LOG_LEVEL]: error, info, debug, warn
+[CONDITION_STATUS]: active, inactive
+[CONDITION_TYPE]: userDefined, systemDefault
+[visibility]: private, public, protected
+[responseFormat]: TEXT, CSV, XML
+
+Sender: id, List<registered-schemaNames>, accountId
+
+Consumer: id, List<registered-schemaNames>, accountId
+
+Account: id, CreatedOn, [ACCOUNT_TYPE], [ACCOUNT_STATUS], msg/SecondAllowed
+
+LogSchema: Map<sourceName,  List<Fields>>
+
+Log: id, receiveTime, [LOG_LEVEL], schemaName, senderId, logString, <host> , stackTrace, applicationName, loggerName(elastic, db , MyClass)
+
+Criteria: id, List<SearchCondition>, name, schemaName, userId
+SearchCondition extends SystemSearchCondtion: id,<field>, createdOn, userId, [CONDITION_STATUS], [CONDITION_TYPE], [visibility]
+
+Field: id, value, lastOfNo.OfDays
+
+SystemSearchCondtion: id, <field>
+
+
+APIs
+{ } -> responses
+
+addLog(userId, <log>)
+ <= response | {added, storageLimitReached}
+registerSchema (userId, schemaName, Map<FieldId, FieldType>)
+ <= registered | failed | already-registerd
+updateSchema(userid,  schemaName, Map<FieldId, FieldType>)
+ =< updated | failed
+
+createCondition(userId, List< <field>, visibility >, schemaName)
+ <= 200 | fieldNotFound | invalid-field-value
+
+listCriteria(userId, allowPublicConditions) <= list<SearchCondition >
+
+matchLogs(List<conditionId>) <= List<Log>
+
+CONSUMER:
+getPreprocessedLogs
+(consumerId, schema, List<Conditions>, limit(500 or min .w.r.to.license), [responseFormat])
+
+

@@ -1,0 +1,71 @@
+Design an IDE for online/offline code editing and running
+
+Requirements:
+Major Language support
+Plugings
+Free or licensed
+Frameworks
+Basic text editors => json, txt, yml
+basic System requirements
+support for version control
+Terminal support
+
+
+* basic System requirements
+single instance : 1gb ram
+min ram req = 2*1gb RAM
+application size : 4GB
+5-7 : sonarlint, git, docker . . . => 100*7 => 700Mbs
+100files * 500Kb => 50 MB
+Dependencies(maven/gradle/ant) => 1-2Mb to 200mb
+10 microservices: 200*2 + 20*50 => 1.5GB
+2 MS: 50-100MB of in memory data => 200MB
+
+Major Language support
+frameworks: spring, kotlin , android
+code compilation
+error checking, warnings
+
+* Components
+Plugins
+File explorer
+version control system
+code handling :
+        dependency management tool: to track code and its depen.
+
+
+
+*User interface
+<user metadata> = name, email, ph no.>
+<collaborator> => monitoring
+1. Language selection (drop down)
+2. environment (dark/light)
+3. Question selection
+4. timer (flexible)
+5. code compilation and result checking
+6. boiler plate code
+
+what happens when you hit run button:
+*backend components:
+1. start test -> spawning a simple machine (docker : language)
+    => open api (userid, language, timer: [-1, infinite, 25]) =< sends back session id
+    => runtests(code, session_id)
+2. compilation:
+    => compiling live code => UI component  ; ok
+    => error
+3. Auto complete
+    => String => 25 methods
+    => Spawn a java compiler
+    => list.size()  : int
+    List<Integer> l = new AL();
+    l.add/adall/size . . .
+
+4. Collaborator:
+    => aABbCc
+    =>
+
+5. Scaling:
+   standalone users
+   interviews/coll =>
+   language specific machines
+
