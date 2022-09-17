@@ -11,7 +11,7 @@ public class MaxSumInMatrix {
 
   public static void main(String[] args) {
     int[][] arr = {
-        {1, 2, 100},
+        {1, 2, 1000},
         {4, 100, 6},
         {7, 8, 9},
         {5, 11, 4}

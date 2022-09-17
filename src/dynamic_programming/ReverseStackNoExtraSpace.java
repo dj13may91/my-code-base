@@ -20,16 +20,20 @@ public class ReverseStackNoExtraSpace {
     System.out.println("val : " + val + " " + s);
     if (s.isEmpty()) {
       s.push(val);
+      System.out.println("empty push: " + val);
     } else {
       int x = s.pop();
+      System.out.println("end pop: " + x);
       insetAtEnd(val);
       s.push(x);
+      System.out.println("reverse pop push: " + x);
     }
   }
 
   public static void reverse() {
     if (s.size() > 0) {
       int val = s.pop();
+      System.out.println("reverse pop : " + val);
       reverse();
       insetAtEnd(val);
     }// n + n2 + n
