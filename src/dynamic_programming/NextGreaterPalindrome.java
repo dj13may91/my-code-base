@@ -1,63 +1,41 @@
 package dynamic_programming;
 // uber
+// https://www.geeksforgeeks.org/given-a-number-find-next-smallest-palindrome-larger-than-this-number/
 public class NextGreaterPalindrome {
     public static void main(String[] args) {
-        System.out.println(getNextGreaterPalindrome("1212"));
-        System.out.println(getNextGreaterPalindrome("12"));
-        System.out.println(getNextGreaterPalindrome("12222"));
+//        int num[] = {9, 4, 1, 8, 7, 9, 7, 8, 3, 2, 2};
+//        int[] num = {1, 2, 3, 3, 1};
+//        int[] num = {9, 9, 9};
+//        int[] num = {7, 8, 3, 3, 2, 2};
+//        int[] num = {1, 2, 5, 3, 2, 2};
+        int[] num = {1, 4, 5, 8, 7, 6, 7, 8, 3, 2, 2};
+        System.out.println(nextValidPalindrome(num));
     }
 
-    public static String getNextGreaterPalindrome(String s) {
-        int len = s.length();
-        String response = "";
-        boolean isPalindrome = isPalindrome(s);
-        if (len % 2 == 0) { // even
-            int left = Integer.parseInt(s.substring(0, s.length() / 2));
-            StringBuilder res = new StringBuilder();
-            res.append(left).append(new StringBuilder("" + left).reverse());
-            if (s.compareTo(res.toString()) >= 0) {
-                System.out.println(s + " -> even small: " + res);
-                res = new StringBuilder(getNextEvenBig(s));
-            }
-            return String.valueOf(res);
-
-        } else { // odd
-            if (isPalindrome) {
-                System.out.println("Already an odd palindrome");
-                return getNextOddBig(s);
-            }
-            char mid = s.charAt(len / 2);
-            StringBuilder sb = new StringBuilder();
-            StringBuilder leftHalf = new StringBuilder(s.substring(0, len / 2));
-            sb.append(leftHalf).append(mid).append(leftHalf.reverse());
-            System.out.println(sb);
-            if (s.compareTo(sb.toString()) >= 0) {
-                System.out.println("odd small");
-                sb = new StringBuilder(getNextOddBig(s));
-            }
-            System.out.println(sb);
-
+    private static String nextValidPalindrome(int[] num) {
+        if (isAll9s(num)) {
+            return 1 + "0".repeat(Math.max(0, num.length - 1)) + 1;
         }
-        return response;
-    }
 
-    private static String getNextEvenBig(String s) {
-        int left = Integer.parseInt(s.substring(0, s.length() / 2));
-        left++;
-        return String.valueOf(left) + new StringBuilder(String.valueOf(left)).reverse();
-    }
-
-    public static String getNextOddBig(String s) {
-        int left = Integer.parseInt(s.substring(0, s.length() / 2 + 1));
-        left++;
-        return String.valueOf(left) + new StringBuilder(String.valueOf(left / 10)).reverse();
-    }
-
-    public static boolean isPalindrome(String s) {
-        for (int i = 0; i < s.length() / 2; i++) {
-            if (s.charAt(i) != s.charAt(s.length() - i - 1)) {
-                return false;
+        int len = num.length;
+        int left = (len - 1) / 2;
+        int right = len / 2;
+        while (left > 0) {
+            if (num[left] < num[right]) {
+                num[left]++;
+                for (int i = left + 1; i < right; i++) num[i] = 0;
             }
+            num[right] = num[left];
+            left--;
+            right++;
+        }
+        num[right] = num[left];
+        return Arrays.toString(num);
+    }
+
+    private static boolean isAll9s(int[] num) {
+        for (int j : num) {
+            if (j != 9) return false;
         }
         return true;
     }
